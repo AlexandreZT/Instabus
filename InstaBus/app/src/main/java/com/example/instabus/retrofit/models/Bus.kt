@@ -18,7 +18,8 @@ data class Bus(
             val lon: String,
             val street_name: String,
             val utm_x: String,
-            val utm_y: String
+            val utm_y: String,
+            val picture: String
         ) {
             data class BusInfo(
                 val picture: String,

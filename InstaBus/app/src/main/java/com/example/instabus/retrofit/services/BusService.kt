@@ -1,11 +1,11 @@
 package com.example.instabus.retrofit.services
 
-import com.example.instabus.retrofit.models.Bus
+import com.example.instabus.retrofit.models.Bus.Data.Tmb
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface CountryService {
+interface BusService {
 
     @GET("buses")
-    fun getBusList () : Call<List<Bus>>
+    fun getBusList () : Call<List<Tmb>>
 }

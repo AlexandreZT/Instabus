@@ -20,14 +20,4 @@
         android:textSize="24sp"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bus_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@+id/tvStreetName"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="89dp"
-        />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

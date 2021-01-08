@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instabus.R
 import com.squareup.picasso.Picasso
 
-import com.example.instabus.retrofit.models.Bus
-class BusesAdapter(private val busesList: List<Bus>) :RecyclerView.Adapter<BusesAdapter.ViewHolder>()  {
+import com.example.instabus.retrofit.models.Bus.Data.Tmb
+class BusesAdapter(private val busesList: List<Tmb>) :RecyclerView.Adapter<BusesAdapter.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view  = LayoutInflater.from(parent.context).inflate(R.layout.activity_main,parent,false)
+        val view  = LayoutInflater.from(parent.context).inflate(R.layout.activity_main, parent,false)
         return ViewHolder(view)
     }
 
@@ -30,17 +30,13 @@ class BusesAdapter(private val busesList: List<Bus>) :RecyclerView.Adapter<Buses
 
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView) {
 
-        //var imageView = itemView.findViewById<ImageView>(R.id.ivPicture)
+        var ivPicture = itemView.findViewById<ImageView>(R.id.ivPicture)
         var tvStreetName = itemView.findViewById<TextView>(R.id.tvStreetName)
 
 
-        fun bind(bus: Bus) {
-            tvStreetName.text = bus.data.tmbs.street_name
-            //Picasso.get().load(bus.BusInfo.picture).into(imageView)
+        fun bind(bus: Tmb) {
+            tvStreetName.text = bus.street_name
+            Picasso.get().load(bus.picture).into(ivPicture)
         }
-
-
-
     }
-}
 }
