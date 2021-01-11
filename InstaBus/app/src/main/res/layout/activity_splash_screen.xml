@@ -4,19 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/teal_icon"
     tools:context=".SplashScreenActivity">
 
     <ImageView
-        android:id="@+id/instbuslogo"
+        android:id="@+id/logo"
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="288dp"
-        android:layout_marginBottom="295dp"
-        android:src="@drawable/instabuslogo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="237dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/logo_icon"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="166dp"
+        android:backgroundTint="@color/white"
+        android:foregroundTint="@color/white"
+        android:indeterminateTint="@color/white"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        android:secondaryProgressTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
