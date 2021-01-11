@@ -5,14 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.instabus.R
 import com.example.instabus.retrofit.helpers.BusesAdapter
 import com.example.instabus.retrofit.models.Bus
 import com.example.instabus.retrofit.services.BusService
 import com.example.instabus.retrofit.services.ServiceBuilder
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_view.*
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Call
-// import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
-        // loadBuses()
+        loadBuses()
     }
 
     private fun loadBuses() {
