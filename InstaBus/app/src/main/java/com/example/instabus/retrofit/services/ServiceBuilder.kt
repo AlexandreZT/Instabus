@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    private const val URL = "http://barcelonaapi.marcpous.com/bus/stations.json"
+    private const val URL = "http://barcelonaapi.marcpous.com/bus/stations.json/"
     //CREATE HTTP CLIENT
     private val okHttp = OkHttpClient.Builder()
 
