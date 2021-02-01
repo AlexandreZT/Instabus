@@ -1,3 +1,4 @@
+/*
 package com.example.instabus.retrofit.services
 
 import okhttp3.OkHttpClient
@@ -22,4 +23,4 @@ object ServiceBuilder {
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit.create(serviceType)
     }
-}
+}*/

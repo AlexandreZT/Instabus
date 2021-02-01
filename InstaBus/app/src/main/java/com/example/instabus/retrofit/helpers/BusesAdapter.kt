@@ -1,3 +1,4 @@
+/*
 package com.example.instabus.retrofit.helpers
 
 import android.util.Log
@@ -39,4 +40,4 @@ class BusesAdapter(private val busesList: List<Tmb>) :RecyclerView.Adapter<Buses
             Picasso.get().load(bus.picture).into(ivPicture)
         }
     }
-}
+}*/
