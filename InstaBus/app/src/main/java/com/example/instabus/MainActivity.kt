@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instabus.R
 // import com.example.instabus.retrofit.models.Bus
-import com.example.instabus.retrofit.models.StationAPI
-import com.example.instabus.retrofit.models.StationResponse
+import com.example.instabus.retrofit.models.BarcelonaAPI
+import com.example.instabus.retrofit.models.APIResponse
 // import com.example.instabus.retrofit.services.BusService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -31,62 +31,46 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
 
+        loadStations() // on récupère les données
+        // loadBuses() // ancienne version (avec recycler view)
+    }
+
+    private fun loadStations(){
         val moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
                 .build()
 
-        val retrofit: Retrofit = Retrofit.Builder()
+        val retrofit = Retrofit.Builder()
                 .baseUrl("http://barcelonaapi.marcpous.com")
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
 
-        val service = retrofit.create(StationAPI::class.java)
+        val service = retrofit.create(BarcelonaAPI::class.java)
         val call = service.stationsList()
 
-        call.enqueue(object : Callback<StationResponse> {
+        call.enqueue(object : Callback<APIResponse> {
             override fun onResponse(
-                    call: Call<StationResponse>,
-                    response: Response<StationResponse>
+                    call: Call<APIResponse>,
+                    response: Response<APIResponse>
             ) {
                 val statusCode: Int = response.code()
-                val resp: StationResponse? = response.body()
+                val resp: APIResponse? = response.body()
 
-                Log.d("JSON", "Status code: $statusCode")
-                Log.d("JSON", "Resp: $resp")
+                Log.d("API Callback", "Status code: $statusCode")
+                Log.d("API Callback", "Response: $resp")
+
+                if (resp != null) {
+                    for (station in resp.data.stations){
+                        Log.d("API Callback","Found : $station")
+                    }
+                }
             }
 
-            override fun onFailure(call: Call<StationResponse>?, t: Throwable) {
+            override fun onFailure(call: Call<APIResponse>?, t: Throwable) {
                 t.printStackTrace()
+                Log.e("API Callback", "Failure : $t")
             }
         })
-
-    //-------------------------------------------------------------
-//        val baseURL = "http://barcelonaapi.marcpous.com" // +ssl ?
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(baseURL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//
-//        val service = retrofit.create(BusService::class.java)
-//        val bustList = service.getBusList()
-//
-//        // Exécution de la requête HTTP GET vers l'api
-//        bustList.enqueue(object: Callback<List<Bus.Data.Tmb>> {
-//            override fun onResponse(call: Call<List<Bus.Data.Tmb>>, response: Response<List<Bus.Data.Tmb>>) {
-//                val allBusStations = response.body()
-//                allBusStations?.let {
-//                    for(eachBus in it) {
-//                        Log.d("BUS","Found : $eachBus") // ${eachBus.xx.yy.zz}
-//                    }
-//                }
-//            }
-//            override fun onFailure(call: Call<List<Bus.Data.Tmb>>, t: Throwable) {
-//                Log.e("BUS", "Failed : $t")
-//            }
-//        })
-
-        // loadBuses()
     }
 
    /* private fun loadBuses() {
