@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instabus.R
 import com.squareup.picasso.Picasso
 
-import com.example.instabus.retrofit.models.Bus.Data.Tmb
-class BusesAdapter(private val busesList: List<Tmb>) :RecyclerView.Adapter<BusesAdapter.ViewHolder>()  {
+
+import com.example.instabus.retrofit.models.Station
+
+class BusesAdapter(private val busesList: List<Station>) :RecyclerView.Adapter<BusesAdapter.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view  = LayoutInflater.from(parent.context).inflate(R.layout.activity_main, parent,false)
@@ -20,7 +22,6 @@ class BusesAdapter(private val busesList: List<Tmb>) :RecyclerView.Adapter<Buses
     }
 
     override fun getItemCount(): Int {
-
         return busesList.size
     }
 
@@ -35,9 +36,10 @@ class BusesAdapter(private val busesList: List<Tmb>) :RecyclerView.Adapter<Buses
         var tvStreetName = itemView.findViewById<TextView>(R.id.tvStreetName)
 
 
-        fun bind(bus: Tmb) {
-            tvStreetName.text = bus.street_name
+        fun bind(bus: Station) {
+            tvStreetName.text = bus.streetName
             Picasso.get().load(bus.picture).into(ivPicture)
         }
     }
-}*/
+}
+*/

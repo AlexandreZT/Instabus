@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface BusService {
 
-    @GET("/bus/stations")
+    @GET("/bus/stations.json")
     fun getBusList () : Call<List<Bus.Data.Tmb>>
 }*/

@@ -1,38 +1,51 @@
 package com.example.instabus
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.instabus.R
 // import com.example.instabus.retrofit.models.Bus
 import com.example.instabus.retrofit.models.BarcelonaAPI
 import com.example.instabus.retrofit.models.APIResponse
+import com.example.instabus.retrofit.models.Picture
 // import com.example.instabus.retrofit.services.BusService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 // import com.example.instabus.retrofit.services.ServiceBuilder
 // import com.example.instabus.retrofit.helpers.BusesAdapter
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-//import kotlinx.android.synthetic.main.activity_main.*
-//import kotlinx.android.synthetic.main.item_view.*
+import kotlinx.android.synthetic.main.activity_main.*
+// import kotlinx.android.synthetic.main.item_view.*
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main) // view principal
+        linearLayoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayoutManager
 
-        Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
 
         loadStations() // on récupère les données
         // loadBuses() // ancienne version (avec recycler view)
+
+        val details = findViewById<Button>(R.id.details)
+
+        details.setOnClickListener{
+            val intent = Intent(this, StationDetailsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loadStations(){
@@ -53,22 +66,50 @@ class MainActivity : AppCompatActivity() {
                     call: Call<APIResponse>,
                     response: Response<APIResponse>
             ) {
-                val statusCode: Int = response.code()
                 val resp: APIResponse? = response.body()
-
-                Log.d("API Callback", "Status code: $statusCode")
                 Log.d("API Callback", "Response: $resp")
 
-                if (resp != null) {
-                    for (station in resp.data.stations){
-                        Log.d("API Callback","Found : $station")
+                // val firstStation = resp?.data?.stations?.get(0) // pour la premier station
+                /*if (firstStation != null) {
+                    //  je peux modifier les champs
+                    firstStation.urlPicture = "url de la photo"
+                    firstStation.textPicture = "text de la photo"
+                }*/
+
+                val pic = Picture(1, "img.png", "nice picture")
+                val jsonPicture = pic.uploadPicture()
+                Log.d("JSON", jsonPicture)
+
+                /*var gson = Gson()
+                var jsonString = gson.toJson(Picture(1,"img.png", "description"))*/
+
+                if (response.isSuccessful){ // if 200
+                    if (resp != null) {
+                        // loadPictures
+                        for (station in resp.data.stations){
+                            Log.d("API Callback","Found : $station")
+                        }
                     }
+
+                    // recycler view
+                   /*bus_recycler.apply {
+                        setHasFixedSize(true)
+                        layoutManager = GridLayoutManager(this@MainActivity,2)
+                        adapter = BusesAdapter(response.body()!!)
+                    }*/
+
+                } else { // if != 200
+                    Toast.makeText(this@MainActivity, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.d("STATUS", "${response.code()}")
                 }
+
             }
 
-            override fun onFailure(call: Call<APIResponse>?, t: Throwable) {
+
+
+            override fun onFailure(call: Call<APIResponse>?, t: Throwable) { // pas de réponse
                 t.printStackTrace()
-                Log.e("API Callback", "Failure : $t")
+                    Log.e("API Callback", "Failure : $t")
             }
         })
     }
