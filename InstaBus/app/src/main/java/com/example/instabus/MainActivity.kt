@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
 import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import com.example.instabus.retrofit.models.BarcelonaAPI
 import com.example.instabus.retrofit.models.APIResponse
-import com.example.instabus.retrofit.models.Picture
 import com.example.instabus.retrofit.models.Station
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("API Callback", "Response: $resp")
 
                 // Setup Adapter
-                myAdapter = MyAdapter(dataList)
+                myAdapter = MyAdapter(dataList) // manque un argument
 
                 // Setup Recyclerview
                 recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -102,13 +100,5 @@ class MainActivity : AppCompatActivity() {
                 Log.e("API Callback", "Failure : $t")
             }
         })
-
-        // code est historique, la logique sera surment en partie réutilisé pour accéder aux détails des stations
-        val details = findViewById<Button>(R.id.details) // => street_view
-
-        details.setOnClickListener{
-            val intent = Intent(this, StationDetailsActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
