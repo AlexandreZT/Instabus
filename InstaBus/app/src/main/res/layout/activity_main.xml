@@ -11,14 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"/>
-
-    <Button
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="317dp"
-        tools:layout_editor_absoluteY="2dp"
-        tools:ignore="MissingConstraints" />
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
