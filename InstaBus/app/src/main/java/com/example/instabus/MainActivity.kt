@@ -4,7 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,19 +17,22 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_view.*
+import kotlinx.android.synthetic.main.station_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private val dataList: MutableList<Station> = mutableListOf()
     private lateinit var myAdapter: MyAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // view principal
+
+
         // ---------------------- BEGIN : Retrofit ----------------------
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -51,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("API Callback", "Response: $resp")
 
                 // Setup Adapter
-                myAdapter = MyAdapter(dataList) // manque un argument
+                myAdapter = MyAdapter(dataList, this@MainActivity) // manque un argument
 
                 // Setup Recyclerview
                 recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -100,5 +104,28 @@ class MainActivity : AppCompatActivity() {
                 Log.e("API Callback", "Failure : $t")
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu);
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId;
+        if (id == R.id.home_action){
+            return true
+        }else{
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onItemClick(item: Station, position: Int) {
+        val clickedItem : Station = dataList[position]
+        val intent = Intent(this, StationDetailsActivity::class.java)
+        intent.putExtra("streetName", clickedItem.streetName)
+        intent.putExtra("buses", clickedItem.buses)
+        startActivity(intent)
     }
 }
