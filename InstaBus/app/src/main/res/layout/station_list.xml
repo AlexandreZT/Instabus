@@ -6,10 +6,10 @@
     android:layout_height="70dp">
 
     <ImageView
+        android:id="@+id/station_picture"
         android:layout_width="0dp"
         android:layout_weight="1.5"
         android:layout_height="match_parent"
-        android:id="@+id/station_picture"
         android:scaleType="centerCrop"/>
 
     <TextView
