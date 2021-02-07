@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -104,10 +106,26 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu);
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId;
+        if (id == R.id.home_action){
+            return true
+        }else{
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onItemClick(item: Station, position: Int) {
         val clickedItem : Station = dataList[position]
         val intent = Intent(this, StationDetailsActivity::class.java)
         intent.putExtra("streetName", clickedItem.streetName)
+        intent.putExtra("buses", clickedItem.buses)
         startActivity(intent)
     }
 }

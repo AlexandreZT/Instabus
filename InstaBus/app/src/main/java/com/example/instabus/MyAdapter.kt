@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instabus.retrofit.models.APIResponse
 import com.example.instabus.retrofit.models.Station
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.station_detail.view.*
 import kotlinx.android.synthetic.main.station_list.view.*
 import retrofit2.Callback
 
@@ -26,17 +28,14 @@ class MyAdapter(private val dataList: MutableList<Station>, private val listener
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val data = dataList[position]
 
-        val streetNameTextView = holder.itemView.street_name_view
-        // val stationPictureImgView = holder.itemView.station_picture
+        val stationPictureImgView = holder.itemView.station_picture
+        // Picasso.get().load(data.picture).into(stationPictureImgView)
+        Picasso.get().load(R.drawable.instabuslogo).into(stationPictureImgView)
+
+        val streetNameTextView = holder.itemView.street_name
         val streetName = "${data.streetName} "
         streetNameTextView.text = streetName
 
-        // holder.itemView.street_name_view.text = "${data.streetName}" // shortcut
-
-        // à remettre plus tard
-        /*Picasso.get()
-            .load(data.picture)
-            .into(stationPictureImgView)*/
 
     }
     interface OnItemClickListener{

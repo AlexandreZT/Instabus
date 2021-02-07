@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:layout_margin="12dp"
-        android:id="@+id/street_name_view"/>
+        android:id="@+id/street_name"/>
 
 </LinearLayout>
