@@ -35,10 +35,9 @@ class MyAdapter(private val dataList: MutableList<Station>, private val listener
         val streetNameTextView = holder.itemView.street_name
         val streetName = "${data.streetName} "
         streetNameTextView.text = streetName
-
-
     }
-    interface OnItemClickListener{
+
+    interface OnItemClickListener {
         fun onItemClick(item: Station, position: Int)
     }
 }
@@ -51,4 +50,3 @@ class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 }
-
