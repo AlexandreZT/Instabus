@@ -1,4 +1,3 @@
-# 3ANDM
+# INSTABUS
 
-### liens recommandé : 
-####  • http://barcelonaapi.marcpous.com/bus/stations.json
+Développé par Alexandre ZITOUNI TINLOT & Thomas SENSE
