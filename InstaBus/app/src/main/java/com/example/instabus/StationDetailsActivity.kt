@@ -22,10 +22,9 @@ import kotlinx.android.synthetic.main.station_list.*
 import kotlinx.android.synthetic.main.station_list.view.*
 import kotlinx.android.synthetic.main.station_list.view.station_picture
 import kotlinx.android.synthetic.main.station_detail.view.*
-//import kotlinx.android.synthetic.main.station_detail.view.*
+// import kotlinx.android.synthetic.main.station_detail.view.*
 
 class StationDetailsActivity() : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +57,6 @@ class StationDetailsActivity() : AppCompatActivity() {
             val stationPictureImgView = holder.itemView.stationPicture
             // Picasso.get().load(data.picture).into(stationPictureImgView)
             Picasso.get().load(R.drawable.instabuslogo).into(stationPictureImgView)
-
 
             val busesTextView = holder.itemView.buses
             //val buses = "${data.buses} "
